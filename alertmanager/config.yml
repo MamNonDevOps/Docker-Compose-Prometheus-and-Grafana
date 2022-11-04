@@ -1,26 +1,11 @@
-# route:
-#     receiver: 'slack'
-
-# receivers:
-#     - name: 'slack'
-#       slack_configs:
-#           - send_resolved: true
-#             text: "{{ .CommonAnnotations.description }}"
-#             username: 'Prometheus'
-#             channel: '#prometheus'
-#             api_url: 'https://hooks.slack.com/services/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'
-
-global:
-
-# catch-all route to receive and handle all incoming alerts
 route:
-  group_by: ['alertname']
-  group_wait: 10s
-  receiver: 'telepush'
+    receiver: 'slack'
 
-# telepush configuration here
 receivers:
-- name: 'telepush'
-  webhook_configs:
-  - url: 'https://telepush.dev/api/inlets/alertmanager/55e136'
-    http_config:
+    - name: 'slack'
+      slack_configs:
+          - send_resolved: true
+            text: "{{ .CommonAnnotations.description }}"
+            username: 'Prometheus'
+            channel: '#prometheus'
+            api_url: 'https://hooks.slack.com/services/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'
